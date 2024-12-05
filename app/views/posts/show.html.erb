@@ -1,0 +1,52 @@
+<h2>Comentários</h2>
+
+<%= form_with model: [@post, Comment.new], local: false, id: "new_comment" do |form| %>
+  <p>
+    <%= form.label :content, "Novo Comentário:" %><br>
+    <%= form.text_area :content %>
+  </p>
+  <p>
+    <%= form.submit "Comentar" %>
+  </p>
+<% end %>
+
+<ul id="comments" data-post-id="<%= @post.id %>">
+  <%= render @post.comments %> <!-- Renderiza o partial de cada comentário -->
+</ul>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const commentsContainer = document.querySelector("#comments");
+
+    if (!commentsContainer) {
+      console.error("Seletor #comments não encontrado na página.");
+    } else {
+      console.log("#comments encontrado com sucesso!");
+      
+      // Configura o ActionCable para escutar as transmissões do canal
+      const postId = <%= @post.id %>;  // Pega o ID do post no Ruby e o passa para o JavaScript
+      consumer.subscriptions.create({ channel: "CommentsChannel", post_id: postId }, {
+        connected() {
+          console.log("Conectado ao CommentsChannel");
+        },
+
+        disconnected() {
+          console.log("Desconectado do CommentsChannel");
+        },
+
+        received(data) {
+          if (data.comment) {
+            // Novo comentário adicionado, vamos inserir na lista de comentários
+            commentsContainer.insertAdjacentHTML("beforeend", data.comment);
+          } else if (data.deleted_comment_id) {
+            // Comentário excluído, removemos da lista
+            const commentElement = document.getElementById(`comment_${data.deleted_comment_id}`);
+            if (commentElement) {
+              commentElement.remove();
+            }
+          }
+        }
+      });
+    }
+  });
+</script>

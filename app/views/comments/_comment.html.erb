@@ -1,0 +1,9 @@
+<li id="comment_<%= comment.id %>">
+  <strong><%= comment.user.email %>:</strong>
+  <%= comment.content %>
+
+  <% if comment.user == current_user %>
+    <!-- Link para excluir o comentário -->
+    <%= link_to "Excluir", [comment.post, comment], method: :delete, data: { confirm: "Tem certeza?" } %>
+  <% end %>
+</li>
