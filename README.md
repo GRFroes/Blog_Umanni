@@ -1,92 +1,80 @@
-# Blog com Autenticação no Ruby on Rails
+Blog with Authentication in Ruby on Rails
 
-## Descrição
-Um blog criado com Ruby on Rails, implementando funcionalidades de autenticação de usuários, postagem de conteúdos e comentários dinâmicos usando Action Cable. Este projeto foi desenvolvido como parte de um processo seletivo.
+Description
+A blog built with Ruby on Rails, implementing user authentication, content posting, and dynamic comments using Action Cable. This project was developed as part of a selection process.
 
----
+Installation
+Requirements
+Ruby 3.3.6
+Rails 8.x
+Node.js and Yarn (for assets)
+SQLite or PostgreSQL (depending on your environment setup)
+Git (optional, for version control)
 
-## Instalação
-
-### Requisitos
-- Ruby 3.3.6
-- Rails 8.x
-- Node.js e Yarn (para assets)
-- SQLite ou PostgreSQL (dependendo da configuração do ambiente)
-- Git (opcional, para versionamento)
-
-### Passos para Instalar
-1. Clone este repositório:
-   git clone https://github.com/seu-usuario/blog-rails.git
-   cd blog-rails
-
-2. Instale as dependências:
+Installation Steps
+1. Clone this repository:
+git clone https://github.com/your-username/blog-rails.git
+cd blog-rails
+2. Install dependencies:
 bundle install
 yarn install
-
-3. Configure o banco de dados:
+3. Set up the database:
 rails db:setup
-
-4. Inicie o servidor:
+4. Start the server:
 rails server
+5. Access the system at http://localhost:3000.
 
-5. Acesse o sistema em http://localhost:3000.
+Features
+Basic Features
+User sign-up, login, and logout with Devise.
+Listing of blog posts.
+Creation, editing, and deletion of posts.
+Dynamic comments using Action Cable for real-time updates.
+Access restrictions: only authenticated users can create, edit, or delete posts and comments.
+Additional Improvements
+Interface translated into Portuguese (I18n).
+Friendly error messages.
+Responsive layout.
 
-Funcionalidades
+Project Structure
+Controllers: Manage user actions and business logic.
+Models: Contain business rules and database interactions.
+Views: Present information to the user.
+Channels: Used by Action Cable for real-time updates.
 
-Funcionalidades Básicas
-Cadastro, login e logout de usuários com Devise.
-Listagem de postagens.
-Criação, edição e exclusão de postagens.
-Comentários dinâmicos utilizando Action Cable para atualização em tempo real.
-Restrições de acesso: apenas usuários autenticados podem criar, editar ou excluir posts e comentários.
+Routes
+Main Routes
+GET /posts -> List posts
+POST /posts -> Create a new post
+GET /posts/:id -> Show post details
+PATCH /posts/:id -> Update a post
+DELETE /posts/:id -> Delete a post
+POST /posts/:post_id/comments -> Create a comment
+DELETE /posts/:post_id/comments/:id -> Delete a comment
+GET /users/sign_in -> Login
+GET /users/sign_up -> Register
+DELETE /users/sign_out -> Logout
 
-Melhorias Adicionais
-Interface traduzida para português (I18n).
-Mensagens de erro amigáveis.
-Layout responsivo.
+Use rails routes for more details.
 
-Estrutura do Projeto
-
-Controllers: Gerenciam as ações dos usuários e a lógica de negócios.
-Models: Contêm as regras de negócio e interação com o banco de dados.
-Views: Apresentam as informações ao usuário.
-Channels: Usados pelo Action Cable para atualização em tempo real.
-
-Rotas
-
-Principais rotas
-GET    /posts             -> Listar posts
-POST   /posts             -> Criar um novo post
-GET    /posts/:id         -> Mostrar detalhes de um post
-PATCH  /posts/:id         -> Atualizar um post
-DELETE /posts/:id         -> Excluir um post
-
-POST   /posts/:post_id/comments -> Criar comentário
-DELETE /posts/:post_id/comments/:id -> Excluir comentário
-
-GET    /users/sign_in     -> Login
-GET    /users/sign_up     -> Registro
-DELETE /users/sign_out    -> Logout
-Use rails routes para mais detalhes.
-
-Testes
-Execute os testes (caso implementados) com o seguinte comando:
+Tests
+Run the tests (if implemented) with the following command:
 rails test
 
-Problemas Conhecidos
-Validação de entradas: Poderia ser mais robusta.
-Design: Ainda não totalmente estilizado.
+Known Issues
+Input validation: Could be more robust.
+Design: Still not fully styled.
 
-Créditos
-Desenvolvido por: Gabriel Rodrigues
-E-mail: gabriel.rfroes@gmail.com
+Credits
+Developed by: Gabriel Rodrigues
+Email: gabriel.rfroes@gmail.com
 GitHub: https://github.com/GRFroes
 
-Futuras Melhorias
-Implementação de testes automatizados para garantir a qualidade do código.
-Melhoria no design da interface
+Future Improvements
+Implementation of automated tests to ensure code quality.
+Improvement in the interface design.
 
-Referências
-Documentação oficial do Rails
+References
+Official Rails Documentation
 Devise GitHub
 Action Cable
